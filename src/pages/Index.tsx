@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback } from "react";
-import { AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProgramsSection from "@/components/ProgramsSection";
@@ -7,9 +6,8 @@ import ClassTypeSection from "@/components/ClassTypeSection";
 import AdmissionInfo from "@/components/AdmissionInfo";
 import RegistrationForm from "@/components/RegistrationForm";
 import Confirmation from "@/components/Confirmation";
+import StoryboardProgress from "@/components/StoryboardProgress";
 import type { FormData } from "@/components/RegistrationForm";
-
-const sectionIds = ["home", "programs", "class-type", "admission", "register"] as const;
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -28,8 +26,22 @@ const Index = () => {
       setFormData(null);
     }
     setActiveSection(id);
-    sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   }, [submitted]);
+
+  const handleProgramSelect = (name: string) => {
+    setSelectedProgram(name);
+    // Auto-advance to class type
+    setTimeout(() => scrollTo("class-type"), 600);
+  };
+
+  const handleClassTypeSelect = (type: string) => {
+    setSelectedType(type);
+    // Auto-advance to registration
+    setTimeout(() => scrollTo("register"), 600);
+  };
 
   const handleSubmit = (data: FormData) => {
     setFormData(data);
@@ -51,18 +63,19 @@ const Index = () => {
   return (
     <>
       <Navbar activeSection={activeSection} onNavigate={scrollTo} />
+      <StoryboardProgress activeSection={activeSection} />
       <div className="pt-16">
         <div ref={(el) => { sectionRefs.current["home"] = el; }}>
           <HeroSection onNavigate={scrollTo} />
         </div>
-        <div ref={(el) => { sectionRefs.current["programs"] = el; }}>
-          <ProgramsSection selectedProgram={selectedProgram} onSelect={setSelectedProgram} />
-        </div>
-        <div ref={(el) => { sectionRefs.current["class-type"] = el; }}>
-          <ClassTypeSection selectedType={selectedType} onSelect={setSelectedType} />
-        </div>
         <div ref={(el) => { sectionRefs.current["admission"] = el; }}>
           <AdmissionInfo acknowledged={acknowledged} onAcknowledge={() => setAcknowledged(true)} />
+        </div>
+        <div ref={(el) => { sectionRefs.current["programs"] = el; }}>
+          <ProgramsSection selectedProgram={selectedProgram} onSelect={handleProgramSelect} />
+        </div>
+        <div ref={(el) => { sectionRefs.current["class-type"] = el; }}>
+          <ClassTypeSection selectedType={selectedType} onSelect={handleClassTypeSelect} />
         </div>
         <div ref={(el) => { sectionRefs.current["register"] = el; }}>
           <RegistrationForm selectedProgram={selectedProgram} selectedType={selectedType} onSubmit={handleSubmit} />

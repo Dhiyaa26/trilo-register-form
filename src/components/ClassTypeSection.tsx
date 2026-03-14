@@ -4,19 +4,19 @@ import { Sun, Briefcase } from "lucide-react";
 const classTypes = [
   {
     id: "Reguler",
-    title: "Reguler Class",
-    subtitle: "Full-time Academic",
-    desc: "Full-time program designed for high school graduates. Attend classes during weekdays with comprehensive academic support and campus activities.",
+    title: "Kelas Reguler",
+    subtitle: "Akademik Penuh Waktu",
+    desc: "Program penuh waktu yang dirancang untuk lulusan SMA. Kuliah pada hari kerja dengan dukungan akademik menyeluruh dan kegiatan kampus.",
     icon: Sun,
-    features: ["Weekday schedule", "Full campus access", "Student organizations", "Research opportunities"],
+    features: ["Jadwal hari kerja", "Akses kampus penuh", "Organisasi mahasiswa", "Kesempatan riset"],
   },
   {
     id: "Karyawan",
-    title: "Karyawan Class",
-    subtitle: "Professional Flex",
-    desc: "Evening and weekend classes tailored for working professionals. Balance your career growth with academic advancement.",
+    title: "Kelas Karyawan",
+    subtitle: "Profesional Fleksibel",
+    desc: "Kelas malam dan akhir pekan yang dirancang untuk profesional yang bekerja. Seimbangkan karier dengan kemajuan akademik.",
     icon: Briefcase,
-    features: ["Evening & weekend", "Flexible schedule", "Industry networking", "Career mentoring"],
+    features: ["Malam & akhir pekan", "Jadwal fleksibel", "Networking industri", "Bimbingan karier"],
   },
 ];
 
@@ -36,10 +36,10 @@ const ClassTypeSection = ({ selectedType, onSelect }: ClassTypeSectionProps) => 
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Choose Your Class Type
+            Pilih Tipe Kelas
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            Select the class format that best fits your lifestyle and learning goals.
+            Pilih format kelas yang paling sesuai dengan gaya hidup dan tujuan belajar Anda.
           </p>
         </motion.div>
 
