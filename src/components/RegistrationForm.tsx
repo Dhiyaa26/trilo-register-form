@@ -48,12 +48,12 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
 
   const validate = (): boolean => {
     const errs: Partial<Record<keyof FormData, string>> = {};
-    if (!form.fullName.trim()) errs.fullName = "Required";
-    if (!form.email.includes("@")) errs.email = "Valid email required";
-    if (!form.phone.trim()) errs.phone = "Required";
-    if (!form.dob) errs.dob = "Required";
-    if (!form.highSchool.trim()) errs.highSchool = "Required";
-    if (!form.graduationYear.trim()) errs.graduationYear = "Required";
+    if (!form.fullName.trim()) errs.fullName = "Wajib diisi";
+    if (!form.email.includes("@")) errs.email = "Email tidak valid";
+    if (!form.phone.trim()) errs.phone = "Wajib diisi";
+    if (!form.dob) errs.dob = "Wajib diisi";
+    if (!form.highSchool.trim()) errs.highSchool = "Wajib diisi";
+    if (!form.graduationYear.trim()) errs.graduationYear = "Wajib diisi";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -81,10 +81,10 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Online Registration
+            Formulir Pendaftaran Online
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            Fill in your details to complete registration.
+            Lengkapi data diri Anda untuk menyelesaikan pendaftaran.
           </p>
         </motion.div>
 
@@ -97,7 +97,7 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
           {/* Progress */}
           <div className="mb-8">
             <div className="flex justify-between text-xs text-muted-foreground mb-2">
-              <span>Form Progress</span>
+              <span>Progres Formulir</span>
               <span className="tabular-nums">{progress}%</span>
             </div>
             <div className="h-1.5 bg-muted rounded-full overflow-hidden">
@@ -112,26 +112,26 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
           <form onSubmit={handleSubmit} className="bg-card rounded-[20px] shadow-card p-8">
             {/* Personal */}
             <h3 className="text-base font-display font-semibold text-foreground mb-5 flex items-center gap-2">
-              <User size={16} className="text-primary" /> Personal Data
+              <User size={16} className="text-primary" /> Data Pribadi
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Full Name</label>
-                <input className={inputClass("fullName")} value={form.fullName} onChange={(e) => update("fullName", e.target.value)} placeholder="Enter your full name" />
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Nama Lengkap</label>
+                <input className={inputClass("fullName")} value={form.fullName} onChange={(e) => update("fullName", e.target.value)} placeholder="Masukkan nama lengkap" />
                 {errors.fullName && <span className="text-xs text-destructive mt-1">{errors.fullName}</span>}
               </div>
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><Mail size={12} /> Email</label>
-                <input type="email" className={inputClass("email")} value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="your@email.com" />
+                <input type="email" className={inputClass("email")} value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="email@contoh.com" />
                 {errors.email && <span className="text-xs text-destructive mt-1">{errors.email}</span>}
               </div>
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><Phone size={12} /> Phone</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><Phone size={12} /> Telepon</label>
                 <input className={inputClass("phone")} value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+62 xxx xxxx xxxx" />
                 {errors.phone && <span className="text-xs text-destructive mt-1">{errors.phone}</span>}
               </div>
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><Calendar size={12} /> Date of Birth</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><Calendar size={12} /> Tanggal Lahir</label>
                 <input type="date" className={inputClass("dob")} value={form.dob} onChange={(e) => update("dob", e.target.value)} />
                 {errors.dob && <span className="text-xs text-destructive mt-1">{errors.dob}</span>}
               </div>
@@ -139,40 +139,40 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
 
             {/* Education */}
             <h3 className="text-base font-display font-semibold text-foreground mb-5 flex items-center gap-2">
-              <GraduationCap size={16} className="text-primary" /> Education Background
+              <GraduationCap size={16} className="text-primary" /> Riwayat Pendidikan
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><School size={12} /> High School Name</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block flex items-center gap-1"><School size={12} /> Nama Sekolah</label>
                 <input className={inputClass("highSchool")} value={form.highSchool} onChange={(e) => update("highSchool", e.target.value)} placeholder="SMA Negeri 1 Jakarta" />
                 {errors.highSchool && <span className="text-xs text-destructive mt-1">{errors.highSchool}</span>}
               </div>
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Graduation Year</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Tahun Lulus</label>
                 <input className={inputClass("graduationYear")} value={form.graduationYear} onChange={(e) => update("graduationYear", e.target.value)} placeholder="2026" />
                 {errors.graduationYear && <span className="text-xs text-destructive mt-1">{errors.graduationYear}</span>}
               </div>
             </div>
 
             {/* Program info */}
-            <h3 className="text-base font-display font-semibold text-foreground mb-5">Program Selection</h3>
+            <h3 className="text-base font-display font-semibold text-foreground mb-5">Pilihan Program</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="px-4 py-3 rounded-xl bg-accent text-sm text-accent-foreground">
-                <span className="text-xs text-muted-foreground block mb-0.5">Study Program</span>
-                {selectedProgram || "Not selected yet"}
+                <span className="text-xs text-muted-foreground block mb-0.5">Program Studi</span>
+                {selectedProgram || "Belum dipilih"}
               </div>
               <div className="px-4 py-3 rounded-xl bg-accent text-sm text-accent-foreground">
-                <span className="text-xs text-muted-foreground block mb-0.5">Class Type</span>
-                {selectedType || "Not selected yet"}
+                <span className="text-xs text-muted-foreground block mb-0.5">Tipe Kelas</span>
+                {selectedType || "Belum dipilih"}
               </div>
             </div>
 
             {/* Upload */}
             <h3 className="text-base font-display font-semibold text-foreground mb-5 flex items-center gap-2">
-              <Upload size={16} className="text-primary" /> Upload Documents
+              <Upload size={16} className="text-primary" /> Unggah Dokumen
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {([["idCard", "ID Card (KTP)"], ["certificate", "Graduation Certificate"]] as const).map(([key, label]) => (
+              {([["idCard", "KTP"], ["certificate", "Ijazah"]] as const).map(([key, label]) => (
                 <button
                   key={key}
                   type="button"
@@ -184,7 +184,7 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
                   }`}
                 >
                   <Upload size={18} />
-                  <span>{uploadedFiles[key] ? `✓ ${label} uploaded` : `Upload ${label}`}</span>
+                  <span>{uploadedFiles[key] ? `✓ ${label} terunggah` : `Unggah ${label}`}</span>
                 </button>
               ))}
             </div>
@@ -203,10 +203,10 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   />
-                  Submitting...
+                  Mengirim...
                 </span>
               ) : (
-                "Submit Registration"
+                "Kirim Pendaftaran"
               )}
             </motion.button>
           </form>

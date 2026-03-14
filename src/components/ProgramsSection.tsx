@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Monitor, Database, BarChart3, Calculator, MessageSquare, Settings } from "lucide-react";
 
 const programs = [
-  { name: "Informatics Engineering", desc: "Build the future with software engineering, AI, and data systems.", icon: Monitor, accreditation: "A" },
-  { name: "Information Systems", desc: "Bridge technology and business with enterprise system design.", icon: Database, accreditation: "A" },
-  { name: "Management", desc: "Lead organizations with strategic thinking and modern management.", icon: BarChart3, accreditation: "A" },
-  { name: "Accounting", desc: "Master financial analysis, auditing, and corporate finance.", icon: Calculator, accreditation: "A" },
-  { name: "Communication Science", desc: "Shape narratives through media, PR, and digital communication.", icon: MessageSquare, accreditation: "B" },
-  { name: "Industrial Engineering", desc: "Optimize systems and processes for manufacturing excellence.", icon: Settings, accreditation: "A" },
+  { name: "Teknik Informatika", desc: "Bangun masa depan dengan rekayasa perangkat lunak, AI, dan sistem data.", icon: Monitor, accreditation: "A" },
+  { name: "Sistem Informasi", desc: "Jembatani teknologi dan bisnis melalui desain sistem enterprise.", icon: Database, accreditation: "A" },
+  { name: "Manajemen", desc: "Pimpin organisasi dengan pemikiran strategis dan manajemen modern.", icon: BarChart3, accreditation: "A" },
+  { name: "Akuntansi", desc: "Kuasai analisis keuangan, audit, dan keuangan korporasi.", icon: Calculator, accreditation: "A" },
+  { name: "Ilmu Komunikasi", desc: "Bentuk narasi melalui media, PR, dan komunikasi digital.", icon: MessageSquare, accreditation: "B" },
+  { name: "Teknik Industri", desc: "Optimalkan sistem dan proses untuk keunggulan manufaktur.", icon: Settings, accreditation: "A" },
 ];
 
 interface ProgramsSectionProps {
@@ -27,10 +27,10 @@ const ProgramsSection = ({ selectedProgram, onSelect }: ProgramsSectionProps) =>
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Explore Study Programs
+            Jelajahi Program Studi
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
-            Select your program of interest. Each program is designed to prepare you for a successful career.
+            Pilih program studi yang diminati. Setiap program dirancang untuk mempersiapkan karier yang sukses.
           </p>
         </motion.div>
 

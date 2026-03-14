@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 
 const navItems = [
-  { id: "home", label: "Home" },
-  { id: "programs", label: "Study Programs" },
-  { id: "class-type", label: "Class Type" },
-  { id: "admission", label: "Admission" },
-  { id: "register", label: "Register" },
+  { id: "home", label: "Beranda" },
+  { id: "admission", label: "Pendaftaran" },
+  { id: "programs", label: "Program Studi" },
+  { id: "class-type", label: "Tipe Kelas" },
+  { id: "register", label: "Daftar" },
 ];
 
 interface NavbarProps {
@@ -46,7 +46,7 @@ const Navbar = ({ activeSection, onNavigate }: NavbarProps) => {
           onClick={() => onNavigate("register")}
           className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
         >
-          Register Now
+          Daftar Sekarang
         </button>
       </div>
     </nav>
