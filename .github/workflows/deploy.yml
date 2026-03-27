@@ -23,8 +23,6 @@ jobs:
       - run: npm run build
       - name: Add 404.html fallback for SPA
         run: cp dist/index.html dist/404.html
-      - name: Add CNAME for custom domain
-        run: echo "dhiyaa.register.form" > dist/CNAME
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
