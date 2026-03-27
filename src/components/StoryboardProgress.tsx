@@ -11,21 +11,22 @@ const steps = [
 
 interface StoryboardProgressProps {
   activeSection: string;
+  onNavigate: (id: string) => void;
 }
 
-const StoryboardProgress = ({ activeSection }: StoryboardProgressProps) => {
+const StoryboardProgress = ({ activeSection, onNavigate }: StoryboardProgressProps) => {
   const activeIndex = steps.findIndex((s) => s.id === activeSection);
 
   return (
-    <div className="fixed top-16 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-6 py-3">
-        <div className="flex items-center justify-between max-w-3xl mx-auto">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
           {steps.map((step, i) => {
             const isCompleted = i < activeIndex;
             const isActive = i === activeIndex;
             return (
               <div key={step.id} className="flex items-center flex-1 last:flex-none">
-                <div className="flex flex-col items-center gap-1">
+                <button type="button" onClick={() => onNavigate(step.id)} className="flex flex-col items-center gap-1.5">
                   <motion.div
                     animate={{
                       backgroundColor: isCompleted
@@ -36,10 +37,10 @@ const StoryboardProgress = ({ activeSection }: StoryboardProgressProps) => {
                       scale: isActive ? 1.15 : 1,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
                   >
                     {isCompleted ? (
-                      <Check size={14} className="text-primary-foreground" />
+                      <Check size={16} className="text-primary-foreground" />
                     ) : (
                       <span className={isActive ? "text-primary-foreground" : "text-muted-foreground"}>
                         {i + 1}
@@ -47,15 +48,15 @@ const StoryboardProgress = ({ activeSection }: StoryboardProgressProps) => {
                     )}
                   </motion.div>
                   <span
-                    className={`text-[10px] font-medium whitespace-nowrap hidden sm:block ${
+                    className={`text-xs font-semibold whitespace-nowrap hidden sm:block ${
                       isActive ? "text-primary" : isCompleted ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
                     {step.label}
                   </span>
-                </div>
+                </button>
                 {i < steps.length - 1 && (
-                  <div className="flex-1 h-0.5 mx-2 rounded-full bg-muted overflow-hidden">
+                  <div className="flex-1 h-1 mx-2 rounded-full bg-muted overflow-hidden">
                     <motion.div
                       className="h-full bg-primary rounded-full"
                       animate={{ width: isCompleted ? "100%" : "0%" }}

@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Download, ArrowRight } from "lucide-react";
+import { CheckCircle2, Download, ArrowRight, IdCard } from "lucide-react";
 import type { FormData } from "./RegistrationForm";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface ConfirmationProps {
   data: FormData;
@@ -66,6 +69,60 @@ const Confirmation = ({ data, registrationId, onReset }: ConfirmationProps) => {
             <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold shadow-card hover:shadow-card-hover transition-all duration-200 bg-card text-foreground hover:-translate-y-0.5">
               <Download size={16} /> Unduh Bukti PDF
             </button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-accent text-accent-foreground shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5">
+                  <IdCard size={16} /> Preview Kartu Pendaftar
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[380px]">
+                <DialogHeader>
+                  <DialogTitle>Kartu Pendaftar</DialogTitle>
+                </DialogHeader>
+                <Card className="bg-card rounded-[16px] shadow-card border overflow-hidden">
+                  <CardHeader className="pb-0">
+                    <CardTitle className="text-base font-display">Kartu Pendaftar • Universitas Trilogi</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="rounded-[12px] bg-muted border overflow-hidden">
+                      <AspectRatio ratio={3 / 4}>
+                        <img
+                          src={data.photoDataUrl}
+                          alt="Foto pendaftar"
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </div>
+                    <div className="mt-4">
+                      <div className="text-xs text-muted-foreground">ID Pendaftaran</div>
+                      <div className="text-sm font-semibold tabular-nums">{registrationId}</div>
+                    </div>
+                    <div className="mt-3">
+                      <div className="text-xs text-muted-foreground">Nama</div>
+                      <div className="text-sm font-medium">{data.fullName}</div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-3 mt-4">
+                      <div className="px-3 py-2 rounded-lg bg-accent text-accent-foreground">
+                        <div className="text-xs text-muted-foreground">Program Studi</div>
+                        <div className="text-sm font-medium">{data.program}</div>
+                      </div>
+                      <div className="px-3 py-2 rounded-lg bg-accent text-accent-foreground">
+                        <div className="text-xs text-muted-foreground">Tipe Kelas</div>
+                        <div className="text-sm font-medium">{data.classType}</div>
+                      </div>
+                      <div className="px-3 py-2 rounded-lg bg-accent text-accent-foreground">
+                        <div className="text-xs text-muted-foreground">Email</div>
+                        <div className="text-sm font-medium">{data.email}</div>
+                      </div>
+                      <div className="px-3 py-2 rounded-lg bg-accent text-accent-foreground">
+                        <div className="text-xs text-muted-foreground">Telepon</div>
+                        <div className="text-sm font-medium">{data.phone}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </DialogContent>
+            </Dialog>
             <button
               onClick={onReset}
               className="flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-primary text-primary-foreground shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5"

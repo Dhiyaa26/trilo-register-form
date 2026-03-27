@@ -10,7 +10,6 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <img src={campusImage} alt="Kampus Universitas Trilogi" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
       </div>
 
       <div className="relative container mx-auto px-6 py-32">
@@ -18,18 +17,18 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-          className="max-w-2xl"
+          className="max-w-2xl rounded-[28px] p-7 md:p-10 bg-primary/25 border border-primary/35 backdrop-blur-md shadow-card"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-foreground/15 backdrop-blur-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/25 backdrop-blur-sm mb-6 border border-primary/40">
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-primary-foreground/90 text-sm font-medium">Pendaftaran Dibuka 2026/2027</span>
+            <span className="text-white text-sm font-medium">Pendaftaran Dibuka 2026/2027</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-primary-foreground mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
             Membangun Teknopreneur Muda
           </h1>
 
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-lg leading-relaxed">
+          <p className="text-lg text-white/90 mb-8 max-w-lg leading-relaxed">
             Bergabunglah dengan Universitas Trilogi dan wujudkan masa depan inovasi. Mulai perjalanan akademikmu di salah satu universitas swasta terbaik di Indonesia.
           </p>
 
@@ -46,7 +45,7 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => onNavigate("programs")}
-              className="bg-primary-foreground/10 text-primary-foreground border border-primary-foreground/20 px-8 py-3.5 rounded-full font-semibold text-base backdrop-blur-sm transition-all duration-200 hover:bg-primary-foreground/20"
+              className="bg-white/10 text-white border border-white/30 px-8 py-3.5 rounded-full font-semibold text-base backdrop-blur-sm transition-all duration-200 hover:bg-white/20"
             >
               Jelajahi Program
             </motion.button>
@@ -59,8 +58,8 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => {
               { value: "A", label: "Akreditasi" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div className="text-2xl font-display font-bold text-primary-foreground tabular-nums">{stat.value}</div>
-                <div className="text-sm text-primary-foreground/60">{stat.label}</div>
+                <div className="text-2xl font-display font-bold text-white tabular-nums">{stat.value}</div>
+                <div className="text-sm text-white/70">{stat.label}</div>
               </div>
             ))}
           </div>

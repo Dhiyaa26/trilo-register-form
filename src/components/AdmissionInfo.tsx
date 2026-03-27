@@ -73,9 +73,9 @@ const AdmissionInfo = ({ acknowledged, onAcknowledge }: AdmissionInfoProps) => {
             <ul className="space-y-3 mb-6">
               {requirements.map((req) => (
                 <li key={req} className="flex items-center gap-3 text-sm text-foreground">
-                  <div className="w-5 h-5 rounded-md bg-accent flex items-center justify-center flex-shrink-0">
+                  <div className="w-5 h-5 rounded-md bg-accent text-primary flex items-center justify-center flex-shrink-0">
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                      <path d="M2.5 6L5 8.5L9.5 4" stroke="hsl(217,85%,29%)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2.5 6L5 8.5L9.5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                   {req}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Upload, User, Mail, Phone, Calendar, School, GraduationCap } from "lucide-react";
 
@@ -17,6 +17,7 @@ export interface FormData {
   graduationYear: string;
   program: string;
   classType: string;
+  photoDataUrl: string;
 }
 
 const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: RegistrationFormProps) => {
@@ -29,6 +30,7 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
     graduationYear: "",
     program: selectedProgram,
     classType: selectedType,
+    photoDataUrl: "",
   });
   const [uploadedFiles, setUploadedFiles] = useState<{ idCard: boolean; certificate: boolean }>({
     idCard: false,
@@ -36,9 +38,10 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const photoInputRef = useRef<HTMLInputElement | null>(null);
 
   const filledFields = Object.values(form).filter(Boolean).length + Object.values(uploadedFiles).filter(Boolean).length;
-  const totalFields = 10;
+  const totalFields = 11;
   const progress = Math.round((filledFields / totalFields) * 100);
 
   const update = (key: keyof FormData, value: string) => {
@@ -54,6 +57,7 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
     if (!form.dob) errs.dob = "Wajib diisi";
     if (!form.highSchool.trim()) errs.highSchool = "Wajib diisi";
     if (!form.graduationYear.trim()) errs.graduationYear = "Wajib diisi";
+     if (!form.photoDataUrl) errs.photoDataUrl = "Wajib diisi";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -70,6 +74,15 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
     `w-full px-4 py-3 rounded-xl text-sm bg-muted border-0 transition-all duration-200 outline-none focus:bg-card focus:ring-2 focus:ring-primary font-body ${
       errors[key] ? "ring-2 ring-destructive" : ""
     }`;
+
+  const handlePhotoChange = (file: File | null) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      update("photoDataUrl", String(reader.result));
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <section className="py-24 bg-secondary/50">
@@ -171,7 +184,26 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
             <h3 className="text-base font-display font-semibold text-foreground mb-5 flex items-center gap-2">
               <Upload size={16} className="text-primary" /> Unggah Dokumen
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div
+                className={`flex items-center gap-3 px-4 py-4 rounded-xl border-2 border-dashed transition-all duration-200 text-sm cursor-pointer ${
+                  form.photoDataUrl ? "border-primary bg-accent text-accent-foreground" : "border-muted text-muted-foreground hover:border-primary/30"
+                }`}
+                onClick={() => photoInputRef.current?.click()}
+              >
+                <input
+                  ref={photoInputRef}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) => handlePhotoChange(e.target.files?.[0] ?? null)}
+                />
+                <Upload size={18} />
+                <span>{form.photoDataUrl ? "✓ Foto terunggah" : "Unggah Foto"}</span>
+                {form.photoDataUrl && (
+                  <img src={form.photoDataUrl} alt="Foto pengguna" className="ml-auto w-10 h-10 rounded-lg object-cover" />
+                )}
+              </div>
               {([["idCard", "KTP"], ["certificate", "Ijazah"]] as const).map(([key, label]) => (
                 <button
                   key={key}
@@ -188,6 +220,7 @@ const RegistrationForm = ({ selectedProgram, selectedType, onSubmit }: Registrat
                 </button>
               ))}
             </div>
+            {errors.photoDataUrl && <span className="text-xs text-destructive mt-1 block">Foto wajib diunggah</span>}
 
             <motion.button
               type="submit"

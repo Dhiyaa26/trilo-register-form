@@ -19,17 +19,18 @@ const Navbar = ({ activeSection, onNavigate }: NavbarProps) => {
       <div className="container mx-auto flex items-center justify-between h-16 px-6">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold text-sm">UT</span>
+            
           </div>
-          <span className="font-display font-bold text-foreground text-lg">Universitas Trilogi</span>
+          <span className="font-display font-bold text-foreground text-lg">PMB Universitas Trilogi</span>
         </div>
         <div className="hidden md:flex items-center gap-1 relative">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className="relative px-4 py-2 text-sm font-medium transition-colors duration-200"
-              style={{ color: activeSection === item.id ? "hsl(217, 85%, 29%)" : "hsl(217, 10%, 45%)" }}
+              className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                activeSection === item.id ? "text-primary" : "text-muted-foreground"
+              }`}
             >
               {item.label}
               {activeSection === item.id && (
